@@ -23,3 +23,12 @@ Alurnya adalah sebagai berikut:
 5. response terhadap perubahan data dipantau oleh provider
 6. provider memberitahukan UI untuk mengupdate tampilannya
 7. tampilan dengan perubahan data terbaru dikembalikan ke user.
+
+## Tahapan-tahapan
+
+1. Buat project baru dengan perintah `flutter create appwrite_riverpod`
+2. Buka project di vscode, jalankan `flutter pub get`
+3. Hapus folder ios, linux, windows, macos, karena kita tidak menggunakan platform tersebut (memperkecil size project)
+4. Tambahkan dependency untuk package `appwrite, flutter_riverpod, riverpod_annotation, freezed_annotation`
+5. Tambahkan dev dependency untuk package `build_runner, riverpod_generator, freezed, json_serializable`
+6. Tambahkan vs code extensions untuk `Flutter Riverpod Snippets,  Freezed`
