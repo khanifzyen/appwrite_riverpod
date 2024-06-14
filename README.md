@@ -10,7 +10,7 @@ Clean architecture merupakan prinsip pengembangan aplikasi dengan sistem modular
 2. **Domain layer**: berisi logika bisnis dan aturan bisnis
 3. **Data layer**: berinteraksi dengan sumber data eksternal (external datasource)
 
-![Gambar 1. Diagram Alir Clean Architecture](/img/clean_architecture1.png)
+![Gambar 1. Diagram Alir Clean Architecture](/img/clean_architecture.png)
 
 Gambar 1. Diagram Alir Clean Architecture
 
@@ -36,3 +36,9 @@ Alurnya adalah sebagai berikut:
 8. di dalam folder `data`, buat subfolder `appwrite, helpers, repositories, services`
 9. di dalam folder `domain`, buat subfolder `entities, usecase`
 10. di dalam folder `presentation`, buat subfolder `pages, providers, widgets`
+
+## Penjelasan Data Layer
+
+![Gambar 2. Data Layer dalam Clean Architecture](/img/data_layer.png)
+
+Gambar 2. Data Layer dalam Clean Architecture
