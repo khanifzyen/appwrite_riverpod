@@ -24,7 +24,7 @@ Alurnya adalah sebagai berikut:
 6. provider memberitahukan UI untuk mengupdate tampilannya
 7. tampilan dengan perubahan data terbaru dikembalikan ke user.
 
-## Tahapan-tahapan
+## Persiapan Project
 
 1. Buat project baru dengan perintah `flutter create appwrite_riverpod`
 2. Buka project di vscode, jalankan `flutter pub get`
@@ -32,3 +32,7 @@ Alurnya adalah sebagai berikut:
 4. Tambahkan dependency untuk package `appwrite, flutter_riverpod, riverpod_annotation, freezed_annotation`
 5. Tambahkan dev dependency untuk package `build_runner, riverpod_generator, freezed, json_serializable`
 6. Tambahkan vs code extensions untuk `Flutter Riverpod Snippets,  Freezed`
+7. buat subfolder yang diperlukan di dalam folder `lib`, seperti `domain, presentation, data, utils`
+8. di dalam folder `data`, buat subfolder `appwrite, helpers, repositories, services`
+9. di dalam folder `domain`, buat subfolder `entities, usecase`
+10. di dalam folder `presentation`, buat subfolder `pages, providers, widgets`
