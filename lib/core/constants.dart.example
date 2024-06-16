@@ -1,0 +1,3 @@
+const appwriteEndpoint = "https://YOUR-APPWRITE-URL/v1";
+const projectId = "YOUR-PROJECT-ID";
+const databaseId = "YOUR-DATABASE-ID";

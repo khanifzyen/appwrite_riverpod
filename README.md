@@ -90,3 +90,102 @@ Berikut adalah langkah-langkahnya:
 4. Nanti kita akan memerlukan Project ID, dan Database ID ke dalam project flutter.
 
 ## Ujicoba mentrigger dari Flutter ke Appwrite
+
+Untuk uji coba, kita akan membuat `LoginScreen` pada `lib/presentations/pages/login_screen.dart`. Kita buat dua buah tombol, berisi **Sign Up**, dan **Login**, dimana dua tombol tersebut akan langsung memanggil _Appwrite Auth SDK_ untuk Flutter. Jadi tidak ada Clean Architecture disini.
+
+Berikut langkah-langkahnya:
+
+1. Buat `lib/core/constants.dart`, isikan dengan kode berikut:
+```dart
+const appwriteEndpoint = "https://YOUR-APPWRITE-URL/v1";
+const projectId = "YOUR-PROJECT-ID";
+const databaseId = "YOUR-DATABASE-ID";
+```
+Kode diatas adalah konstanta yang digunakan untuk mengkonfigurasi koneksi ke server Appwrite. Anda harus mengganti “YOUR-APPWRITE-URL”, “YOUR-PROJECT-ID”, dan “YOUR-DATABASE-ID” dengan nilai sebenarnya dari proyek Appwrite Anda untuk memulai integrasi dengan aplikasi Flutter.
+
+2. Buat `lib/data/helpers/network_client_helper.dart`, isikan dengan kode berikut:
+```dart
+import 'package:appwrite/appwrite.dart';
+import '../../core/constants.dart';
+
+class NetworkClientHelper {
+  // APPWRITE CLIENT HELPER
+  static final Client _appwriteClient =
+      Client().setEndpoint(appwriteEndpoint).setProject(projectId);
+
+  NetworkClientHelper._();
+
+  static final instance = NetworkClientHelper._();
+
+  Client get appwriteClient => _appwriteClient;
+
+  //how to use: NetworkClientHelper.instance.appwriteClient();
+}
+```
+
+3. Buat `lib/presentation/pages/sign_in_page.dart`, isikan dengan kode berikut:
+```dart
+import 'package:flutter/material.dart';
+import 'package:appwrite/appwrite.dart';
+import '../../data/helpers/network_client_helper.dart';
+
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: [
+        ElevatedButton(
+          onPressed: () async {
+            Account account =
+                Account(NetworkClientHelper.instance.appwriteClient);
+
+            final result = await account.createEmailPasswordSession(
+              email: 'khanif.zyen@gmail.com',
+              password: 'mypassword',
+            );
+          },
+          child: const Text("Sign In"),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed: () async {
+            Account account =
+                Account(NetworkClientHelper.instance.appwriteClient);
+
+            final result = await account.create(
+              userId: ID.unique(),
+              email: 'khanif.zyen@gmail.om',
+              password: 'mypassword',
+              name: 'khanif', // optional
+            );
+          },
+          child: const Text("Sign Up"),
+        ),
+      ]),
+    );
+  }
+}
+```
+4. Buka `main.dart`, isikan dengan kode berikut:
+```dart
+import 'presentation/pages/sign_in_page.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SignInPage(),
+    );
+  }
+}
+```

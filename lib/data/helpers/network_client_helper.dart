@@ -1,12 +1,16 @@
 import 'package:appwrite/appwrite.dart';
+import '../../core/constants.dart';
 
-class NetWorkClientHelpers {
-    // APPWRITE CLIENT HELPER
-  static final Client _appwriteClient = Client()
-      .setEndpoint(dotenv.env['BASE_URL'].toString())
-      .setProject(dotenv.env['PROJECT_ID'].toString());
+class NetworkClientHelper {
+  // APPWRITE CLIENT HELPER
+  static final Client _appwriteClient =
+      Client().setEndpoint(appwriteEndpoint).setProject(projectId);
 
   NetworkClientHelper._();
 
   static final instance = NetworkClientHelper._();
+
+  Client get appwriteClient => _appwriteClient;
+
+  //how to use: NetworkClientHelper.instance.appwriteClient();
 }
