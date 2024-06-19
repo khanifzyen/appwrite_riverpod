@@ -238,3 +238,7 @@ class MyApp extends StatelessWidget {
 ```
 
 5. Simpan dan jalankan. Lakukan Sign Up terlebih dahulu, kemudian Sign In, maka akan muncul snackbar "Sign In successful". Klik Sign Up untuk kedua kali, maka akan muncul snackbar "Failed to Sign In: Email already exists"
+
+![Gambar 4. Login Gagal: User sudah ada](/img/error%20user%20already%20exists.png)
+
+Gambar 4. Login Gagal: User sudah ada
