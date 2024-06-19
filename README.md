@@ -249,4 +249,4 @@ Gambar 4. Login Gagal: User sudah ada
 
 Gambar 5. Appwrite auth: user berhasil terdaftar
 
-Untuk artikel berikutnya masuk ke branch 2.
+Untuk artikel berikutnya masuk ke branch [2-feature-auth](2-feature-auth.md)
