@@ -50,7 +50,7 @@ class SignInPage extends StatelessWidget {
 
                   final result = await account.create(
                     userId: ID.unique(),
-                    email: 'khanif.zyen@gmail.om',
+                    email: 'khanif.zyen@gmail.com',
                     password: 'mypassword',
                     name: 'khanif', // optional
                   );

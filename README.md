@@ -94,6 +94,10 @@ Berikut adalah langkah-langkahnya:
 
 Untuk uji coba, kita akan membuat `LoginScreen` pada `lib/presentations/pages/login_screen.dart`. Kita buat dua buah tombol, berisi **Sign Up**, dan **Login**, dimana dua tombol tersebut akan langsung memanggil _Appwrite Auth SDK_ untuk Flutter. Jadi tidak ada Clean Architecture disini.
 
+![Gambar 3. Wireframe Login Screen](/img/wireframe_login.png)
+
+Gambar 3. Wireframe Login Screen
+
 Berikut langkah-langkahnya:
 
 1. Buat `lib/core/constants.dart`, isikan dengan kode berikut:
@@ -232,3 +236,5 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+5. Simpan dan jalankan. Lakukan Sign Up terlebih dahulu, kemudian Sign In, maka akan muncul snackbar "Sign In successful". Klik Sign Up untuk kedua kali, maka akan muncul snackbar "Failed to Sign In: Email already exists"
