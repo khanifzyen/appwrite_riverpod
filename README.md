@@ -62,7 +62,7 @@ Domain Layer adalah inti dari Clean Architecture, yang berisi logika bisnis dan 
 
 - **Entities:** Ini adalah objek bisnis murni yang merepresentasikan konsep-konsep dalam aplikasi kita, seperti `User`, `Product`, atau `Invoice`. Entities harus independen dari UI atau logika database.
 - **Use Cases:** Ini adalah class yang mengandung logika bisnis spesifik aplikasi. Setiap use case mewakili satu dan hanya satu aksi yang dapat dilakukan pengguna, seperti `FetchUserDetails`, `UpdateProfile`, atau `PlaceOrder`.
-  
+
 Domain Layer memastikan bahwa logika bisnis aplikasi Anda terpisah dari presentasi (UI) dan infrastruktur (data), sehingga memudahkan pengujian dan pemeliharaan.
 
 ## Penjelasan Presentation Layer
@@ -72,7 +72,7 @@ Presentation Layer adalah lapisan yang pengguna berinteraksi langsung dengannya,
 - **Pages:** Ini adalah layar atau halaman dalam aplikasi Anda. Setiap page biasanya mewakili satu fitur atau alur dalam aplikasi.
 - **Widgets:** Ini adalah blok bangunan dasar untuk membangun UI di Flutter. Widgets mendefinisikan bagian visual dan interaksi dari UI, seperti tombol, teks, dan form.
 - **Providers:** Ini adalah mekanisme untuk mengelola state yang digunakan oleh widgets. Providers membantu dalam mengirimkan data dan event antara UI dan Domain Layer.
-  
+
 Presentation Layer memastikan bahwa UI aplikasi Anda terpisah dari logika bisnis dan data, memudahkan pengembangan dan pengujian UI.
 
 # Pembuatan Fitur Authentication
@@ -84,8 +84,9 @@ Kali ini kita akan membuat studi kasus implementasi Clean Architecture dalam dun
 Appwrite tersedia dalam dua jenis versi yaitu versi cloud dan self-host. Versi cloud merupakan versi appwrite (yang tersedia gratis maupun berbayar) yang disediakan di cloud oleh Appwrite Inc, yang siap pakai untuk digunakan oleh developer. Sedangkan self-hosted kita perlu memilih provider VPS kita sendiri dengan spek minimal 2 Core CPU, 4GB RAM, 2GB Swap, 30GB Storage kemudian kita perlu install sendiri Appwrite dari docker compose. Untuk self-hosted sejatinya sebelum kita gunakan di production, bisa kita install sendiri di komputer local, dengan syarat sudah terinstall docker di komputer kita. Untuk memudahkan kita dalam memahami ini, maka kita akan gunakan versi cloud gratis yang disediakan oleh Appwrite Inc.
 
 Berikut adalah langkah-langkahnya:
+
 1. Mendaftar akun baru di https://cloud.appwrite.io, kemudian setelah berhasil login, buatlah project baru. Misal beri nama `my app`
-2. Pada pengaturan proyek, tambahkan platform Flutter. Masukkan bundle ID aplikasi yang sudah kita buat sebelumnya: `com.example appwrite_riverpod`  (nantinya anda perlu mengganti ini menjadi unik jika anda ingin mengupload ke playstore)  
+2. Pada pengaturan proyek, tambahkan platform Flutter. Masukkan bundle ID aplikasi yang sudah kita buat sebelumnya: `com.example appwrite_riverpod` (nantinya anda perlu mengganti ini menjadi unik jika anda ingin mengupload ke playstore)
 3. Pada proyek `my app`, buatlah database baru, misal beri nama `my db`
 4. Nanti kita akan memerlukan Project ID, dan Database ID ke dalam project flutter.
 
@@ -96,14 +97,17 @@ Untuk uji coba, kita akan membuat `LoginScreen` pada `lib/presentations/pages/lo
 Berikut langkah-langkahnya:
 
 1. Buat `lib/core/constants.dart`, isikan dengan kode berikut:
+
 ```dart
 const appwriteEndpoint = "https://YOUR-APPWRITE-URL/v1";
 const projectId = "YOUR-PROJECT-ID";
 const databaseId = "YOUR-DATABASE-ID";
 ```
+
 Kode diatas adalah konstanta yang digunakan untuk mengkonfigurasi koneksi ke server Appwrite. Anda harus mengganti “YOUR-APPWRITE-URL”, “YOUR-PROJECT-ID”, dan “YOUR-DATABASE-ID” dengan nilai sebenarnya dari proyek Appwrite Anda untuk memulai integrasi dengan aplikasi Flutter.
 
 2. Buat `lib/data/helpers/network_client_helper.dart`, isikan dengan kode berikut:
+
 ```dart
 import 'package:appwrite/appwrite.dart';
 import '../../core/constants.dart';
@@ -124,6 +128,7 @@ class NetworkClientHelper {
 ```
 
 3. Buat `lib/presentation/pages/sign_in_page.dart`, isikan dengan kode berikut:
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
@@ -132,43 +137,81 @@ import '../../data/helpers/network_client_helper.dart';
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
+  void _showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        ElevatedButton(
-          onPressed: () async {
-            Account account =
-                Account(NetworkClientHelper.instance.appwriteClient);
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  Account account =
+                      Account(NetworkClientHelper.instance.appwriteClient);
 
-            final result = await account.createEmailPasswordSession(
-              email: 'khanif.zyen@gmail.com',
-              password: 'mypassword',
-            );
-          },
-          child: const Text("Sign In"),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () async {
-            Account account =
-                Account(NetworkClientHelper.instance.appwriteClient);
+                  final result = await account.createEmailPasswordSession(
+                    email: 'khanif.zyen@gmail.com',
+                    password: 'mypassword',
+                  );
+                  print('Sign in successful: ${result}');
+                } on AppwriteException catch (e) {
+                  // Handle AppwriteException (e.g., show error message)
+                  _showSnackbar(context, 'Failed to sign in: ${e.message}');
+                  print('Failed to sign in: ${e.message}');
+                } catch (e) {
+                  // Handle other exceptions
+                  _showSnackbar(context, 'An error occurred: $e');
+                  print('An error occurred: $e');
+                }
+              },
+              child: const Text("Sign In"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  Account account =
+                      Account(NetworkClientHelper.instance.appwriteClient);
 
-            final result = await account.create(
-              userId: ID.unique(),
-              email: 'khanif.zyen@gmail.om',
-              password: 'mypassword',
-              name: 'khanif', // optional
-            );
-          },
-          child: const Text("Sign Up"),
+                  final result = await account.create(
+                    userId: ID.unique(),
+                    email: 'khanif.zyen@gmail.om',
+                    password: 'mypassword',
+                    name: 'khanif', // optional
+                  );
+                  print('Sign up successful: ${result.toString()}');
+                  _showSnackbar(
+                      context, 'Sign up successfull: $result.toString()}');
+                } on AppwriteException catch (e) {
+                  // Handle AppwriteException (e.g., show error message)
+                  _showSnackbar(context, 'Failed to sign up: ${e.message}');
+                  print('Failed to sign up: ${e.message}');
+                } catch (e) {
+                  // Handle other exceptions
+                  _showSnackbar(context, 'An error occurred: $e');
+                  print('An error occurred: $e');
+                }
+              },
+              child: const Text("Sign Up"),
+            ),
+          ],
         ),
-      ]),
+      ),
     );
   }
 }
+
 ```
+
 4. Buka `main.dart`, isikan dengan kode berikut:
+
 ```dart
 import 'presentation/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
