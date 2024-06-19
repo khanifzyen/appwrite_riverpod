@@ -2,7 +2,7 @@ import '/domain/entities/result.dart';
 import '/domain/entities/session.dart';
 import '/domain/entities/user.dart';
 
-abstract interface class Authentication {
+abstract interface class AuthRepository {
   Future<Result<User>> register({
     required String userId,
     required String email,
