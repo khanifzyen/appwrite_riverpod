@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
-extension BuildContextExtension on BuildContext {
-  void showInfoSnackBar(String message) =>
-      ScaffoldMessenger.of(this).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          backgroundColor: Colors.blue,
-        ),
-      );
+enum Status { info, error }
 
-  void showErrorSnackBar(String message) =>
-      ScaffoldMessenger.of(this).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          backgroundColor: Colors.red,
-        ),
-      );
+extension BuildContextExtension on BuildContext {
+  void showSnackBar(String message, Status status) {
+    final backgroundColor = status == Status.info ? Colors.black : Colors.red;
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: backgroundColor,
+      ),
+    );
+  }
 }

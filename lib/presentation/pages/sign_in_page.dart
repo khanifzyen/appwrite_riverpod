@@ -24,15 +24,17 @@ class SignInPage extends StatelessWidget {
                     email: 'khanif.zyen@gmail.com',
                     password: 'mypassword',
                   );
-                  context.showInfoSnackBar('Sign in successful: ${result}');
+                  context.showSnackBar(
+                      'Sign in successful: ${result}', Status.info);
                   print('Sign in successful: ${result}');
                 } on AppwriteException catch (e) {
                   // Handle AppwriteException (e.g., show error message)
-                  context.showErrorSnackBar('Failed to sign in: ${e.message}');
+                  context.showSnackBar(
+                      'Failed to sign in: ${e.message}', Status.error);
                   print('Failed to sign in: ${e.message}');
                 } catch (e) {
                   // Handle other exceptions
-                  context.showErrorSnackBar('An error occurred: $e');
+                  context.showSnackBar('An error occurred: $e', Status.error);
                   print('An error occurred: $e');
                 }
               },
@@ -51,15 +53,17 @@ class SignInPage extends StatelessWidget {
                     password: 'mypassword',
                     name: 'khanif', // optional
                   );
-                  print('Sign up successful: ${result.toString()}');
-                  context.showInfoSnackBar('Sign up successfull: $result}');
+                  print('Sign up successful: ${result}');
+                  context.showSnackBar(
+                      'Sign up successfull: $result}', Status.info);
                 } on AppwriteException catch (e) {
                   // Handle AppwriteException (e.g., show error message)
-                  context.showErrorSnackBar('Failed to sign up: ${e.message}');
+                  context.showSnackBar(
+                      'Failed to sign up: ${e.message}', Status.error);
                   print('Failed to sign up: ${e.message}');
                 } catch (e) {
                   // Handle other exceptions
-                  context.showErrorSnackBar('An error occurred: $e');
+                  context.showSnackBar('An error occurred: $e', Status.error);
                   print('An error occurred: $e');
                 }
               },
