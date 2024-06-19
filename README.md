@@ -248,3 +248,5 @@ Gambar 4. Login Gagal: User sudah ada
 ![Gambar 5. Appwrite auth: user berhasil terdaftar](/img/appwrite%20user.png)
 
 Gambar 5. Appwrite auth: user berhasil terdaftar
+
+Untuk artikel berikutnya masuk ke branch 2.
