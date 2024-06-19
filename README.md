@@ -242,3 +242,9 @@ class MyApp extends StatelessWidget {
 ![Gambar 4. Login Gagal: User sudah ada](/img/error%20user%20already%20exists.png)
 
 Gambar 4. Login Gagal: User sudah ada
+
+6. Cek di appwrite console, di bagian Auth, terlihat user yang terdaftar sudah masuk ke appwrite.
+
+![Gambar 5. Appwrite auth: user berhasil terdaftar](/img/appwrite%20user.png)
+
+Gambar 5. Appwrite auth: user berhasil terdaftar
