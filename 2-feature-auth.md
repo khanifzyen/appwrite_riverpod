@@ -1,10 +1,9 @@
 # Pembuatan Fitur Auth
 
-Todo:
-1. signup
-2. signin
-3. reset password
-4. send verification email
-5. if not verified send to login_screen with message "User not verified yet"
-6. if verified send to dashboard
-7. Create global snackbar for info and error messages 
+|#|Todo|Done|
+|---|---|---|
+|1|Create snackbar extension for info and error messages|&#9745;|
+|2|Create Result entity |&#x2610;|
+|3|Create User entity |&#x2610;|
+|4|Create auth repository|&#x2610;|
+
