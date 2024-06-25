@@ -1,4 +1,6 @@
-import 'presentation/pages/sign_in_page.dart';
+import 'presentation/pages/user_profile_page.dart';
+
+//import 'presentation/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignInPage(),
+      home: UserProfilePage(),
     );
   }
 }
