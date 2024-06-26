@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import '../../core/theme/theme.dart';
+import '../../data/static/static_data.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({super.key});
@@ -21,6 +23,7 @@ class UserProfilePageState extends State<UserProfilePage> {
   final TextEditingController _emergencyContactController =
       TextEditingController();
   XFile? _profileImage;
+  final MaterialTheme materialTheme = const MaterialTheme(TextTheme());
 
   void _pickDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -51,6 +54,7 @@ class UserProfilePageState extends State<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -89,10 +93,11 @@ class UserProfilePageState extends State<UserProfilePage> {
                     right: 0,
                     child: GestureDetector(
                       onTap: _pickImage,
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 15,
-                        backgroundColor: Colors.blue,
-                        child: Icon(Icons.add, size: 20, color: Colors.white),
+                        backgroundColor: colorScheme.primary,
+                        child: Icon(Icons.add,
+                            size: 20, color: colorScheme.onPrimary),
                       ),
                     ),
                   ),
@@ -114,10 +119,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                 border: OutlineInputBorder(),
               ),
               value: _selectedGender,
-              items: const [
-                DropdownMenuItem(value: 1, child: Text('Laki-laki')),
-                DropdownMenuItem(value: 2, child: Text('Perempuan')),
-              ],
+              items: StaticData.jenisKelamin.entries
+                  .map((entry) => DropdownMenuItem<int>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ))
+                  .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedGender = value;
@@ -146,11 +153,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                 border: OutlineInputBorder(),
               ),
               value: _selectedJob,
-              items: const [
-                DropdownMenuItem(value: 1, child: Text('Mahasiswa')),
-                DropdownMenuItem(value: 2, child: Text('Karyawan')),
-                DropdownMenuItem(value: 3, child: Text('Lainnya')),
-              ],
+              items: StaticData.pekerjaan.entries
+                  .map((entry) => DropdownMenuItem<int>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ))
+                  .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedJob = value;
@@ -173,11 +181,12 @@ class UserProfilePageState extends State<UserProfilePage> {
               ),
             const SizedBox(height: 20),
             DropdownButtonFormField<int>(
-              items: const [
-                DropdownMenuItem(value: 1, child: Text('Mahasiswa')),
-                DropdownMenuItem(value: 2, child: Text('Karyawan')),
-                DropdownMenuItem(value: 3, child: Text('Lainnya')),
-              ],
+              items: StaticData.pendidikan.entries
+                  .map((entry) => DropdownMenuItem<int>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ))
+                  .toList(),
               decoration: const InputDecoration(
                 labelText: 'Kota Asal',
                 border: OutlineInputBorder(),
@@ -198,11 +207,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                 border: OutlineInputBorder(),
               ),
               value: _selectedStatus,
-              items: const [
-                DropdownMenuItem(value: 1, child: Text('Belum Kawin')),
-                DropdownMenuItem(value: 2, child: Text('Kawin')),
-                DropdownMenuItem(value: 3, child: Text('Kawin memiliki anak')),
-              ],
+              items: StaticData.statusPernikahan.entries
+                  .map((entry) => DropdownMenuItem<int>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ))
+                  .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedStatus = value;
@@ -216,16 +226,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                 border: OutlineInputBorder(),
               ),
               value: _selectedEducation,
-              items: const [
-                DropdownMenuItem(value: 1, child: Text('SD/MI')),
-                DropdownMenuItem(value: 2, child: Text('SMP/MTs')),
-                DropdownMenuItem(value: 3, child: Text('SMA/MA')),
-                DropdownMenuItem(value: 4, child: Text('SMK/MAK')),
-                DropdownMenuItem(value: 5, child: Text('Diploma')),
-                DropdownMenuItem(value: 6, child: Text('S1')),
-                DropdownMenuItem(value: 7, child: Text('S2')),
-                DropdownMenuItem(value: 8, child: Text('S3')),
-              ],
+              items: StaticData.pendidikan.entries
+                  .map((entry) => DropdownMenuItem<int>(
+                        value: entry.key,
+                        child: Text(entry.value),
+                      ))
+                  .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedEducation = value;

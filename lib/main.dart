@@ -1,20 +1,24 @@
+import 'core/theme/theme.dart';
 import 'presentation/pages/user_profile_page.dart';
 
 //import 'presentation/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  final MaterialTheme materialTheme = const MaterialTheme(TextTheme());
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: materialTheme.light(),
+      darkTheme: materialTheme.dark(),
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: UserProfilePage(),
+      home: const UserProfilePage(),
     );
   }
 }
