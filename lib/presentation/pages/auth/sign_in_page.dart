@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 
-import '../../data/helpers/network_client_helper.dart';
-import '../extensions/build_context_extension.dart';
-import '../../core/constants.dart';
+import '../../../data/helpers/network_client_helper.dart';
+import '../../extensions/build_context_extension.dart';
+import '../../../core/constants.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
